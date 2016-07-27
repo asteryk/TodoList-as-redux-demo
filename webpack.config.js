@@ -1,47 +1,58 @@
+'use strict';
 var webpack = require('webpack');
-var path = require('path');
-
+var OpenPackPlugin = require('openpack');
 module.exports = {
-  entry: [
-    'webpack-hot-middleware/client?reload=true',
-    './app/index',
-  ],
-  output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/static/',
-  },
-  plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('development'),
-      }
-    }),
-  ],
-  module: {
-    loaders: [
-      {
-        test: /(\.jsx|\.js)$/,
-        loaders: ['babel?presets[]=es2015&presets[]=react'],
-        exclude: /node_modules/,
-        include: __dirname
-      },
-      {
-        test: /\.scss$/,
-        loaders: ['style', 'css', 'sass'],
-        include: __dirname
-      },
-      {
-        test: /\.html$/,
-        loader: 'file?name=[name].[ext]'
-      },
+
+    output: {
+        filename: './assets/app.js',
+        publicPath: './assets/',
+        path: __dirname + '/dist/'
+    },
+
+    cache: true,
+    debug: true,
+    devtool: 'sourcemap',
+    entry: [
+        'webpack-hot-middleware/client?reload=true',
+        './src/js/index.js'
     ],
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx'],
-  },
-  devtool: 'cheap-module-eval-source-map',
+
+    stats: {
+        colors: true,
+        reasons: true
+    },
+
+    resolve: {
+        extensions: ['', '.js', '.jsx'],
+        alias: {
+            'styles': __dirname + '/src/styles',
+            'images': __dirname + '/src/images/'
+        }
+    },
+    module: {
+        loaders: [{
+            test: /\.(js|jsx)$/,
+            exclude: /node_modules/,
+            loaders: ['babel?presets[]=es2015&presets[]=react']
+        }, {
+            test: /\.sass/,
+            loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax'
+        }, {
+            test: /\.css$/,
+            loader: 'style-loader!css-loader'
+        }, {
+            test: /\.(png|jpg|eot|ttf|svg|woff|woff2)(\?.*)?$/,
+            loader: 'url-loader?limit=8192'
+        }]
+    },
+    plugins: [
+        new OpenPackPlugin({
+            host: 'localhost', // the host of URL. Default is `devServer.host` or 'localhost'
+            port: '9163', // the port of URL. Default is `devServer.port` or '8080',
+            path: 'webpack-dev-server/index.html' // the full path of URL. Default is '/'
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
+    ]
+
 };

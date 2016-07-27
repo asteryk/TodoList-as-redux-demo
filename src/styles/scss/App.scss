@@ -1,0 +1,15 @@
+/* Base Application Styles */
+$color:#bbccff;
+body {
+    color: #000;
+    background: #fff;
+}
+
+.index .notice {
+    margin: 20px auto;
+    padding: 15px 0;
+    text-align: center;
+    border: 1px solid #000;
+    border-width: 1px 0;
+    background: $color;
+}

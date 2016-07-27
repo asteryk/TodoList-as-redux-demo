@@ -1,10 +1,11 @@
+###redux-react-gulp-webpack自制demo
 ```
 npm install
 ```
 # then
 
 ```
-npm run server
+gulp serve
 ```
 
-# open ``http://localhost:3000/`` in browser.
+# open ``http://localhost:9163/webpack-dev-server`` in browser.

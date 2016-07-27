@@ -1,0 +1,16 @@
+{
+    "comment": "redux-react-gulp-webpack",
+    "version": "1.0.0",
+    "product": "redux-react-generator",
+    "contextPath": "",
+    "port": 9163,
+    "hostname": "localhost",
+    "openurl": "http://localhost:9163/#/index.html",
+    "webapp": "/",
+    "imagesPath": "/src/images",
+    "cssPath": "/src/styles",
+    "scssPath": "/src/styles/scss",
+    "jsPath": "/src/js",
+    "htmlPath": "",
+    "build": "dist"
+}
